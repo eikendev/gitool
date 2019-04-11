@@ -29,8 +29,8 @@ def get_default_config_file():
     msg = 'Loading default configuration file.'
     logger.debug(msg)
 
-    config_directory = 'gitool'
-    config_filename = 'config.ini'
+    subdirectory = 'gitool'
+    filename = 'config.ini'
 
     base = '~/.config'
     base = os.getenv('XDG_CONFIG_HOME', base)
@@ -38,8 +38,7 @@ def get_default_config_file():
     base = base.expanduser()
     base = base.resolve()
 
-    directory = base / config_directory
-    config = directory / config_filename
+    config = base / subdirectory / filename
 
     return config
 
