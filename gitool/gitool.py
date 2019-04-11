@@ -1,29 +1,16 @@
 import colorama
 import logging
-import sys
 
 from functools import partial
 
 from .arguments import parse_arguments
 from .config import load_config, get_default_config_file, get_root_dir
 from .exception import GitoolArgumentException, GitoolConfigurationException
+from .logging import setup_logger
 from .methods import status, list_repositories, dump, compare
 from .util import get_repositories
 
 logger = logging.getLogger("gitool")
-
-
-def setup_logger(logger):
-    fmt = "%(asctime)s [%(levelname)s] %(message)s"
-    datefmt = "%Y-%m-%d %H:%M:%S"
-    level = logging.INFO
-
-    formatter = logging.Formatter(fmt=fmt, datefmt=datefmt)
-    sh = logging.StreamHandler(sys.stdout)
-    sh.setFormatter(formatter)
-
-    logger.setLevel(level)
-    logger.addHandler(sh)
 
 
 def execute_method(args, path):
