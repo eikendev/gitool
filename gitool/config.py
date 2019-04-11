@@ -49,7 +49,8 @@ def get_root_dir(path):
         raise GitoolConfigurationException(msg)
 
     path = Path(path)
-    path = path.expanduser().resolve()
+    path = path.expanduser()
+    path = path.resolve()
 
     if not path.exists():
         path.mkdir(parents=True)
