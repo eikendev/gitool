@@ -1,3 +1,18 @@
+.. image:: https://img.shields.io/pypi/status/gitool.svg
+   :target: https://pypi.org/project/gitool/
+
+.. image:: https://img.shields.io/pypi/l/gitool.svg
+   :target: https://pypi.org/project/gitool/
+
+.. image:: https://img.shields.io/pypi/pyversions/gitool.svg
+   :target: https://pypi.org/project/gitool/
+
+.. image:: https://img.shields.io/pypi/v/gitool.svg
+   :target: https://pypi.org/project/gitool/
+
+.. image:: https://img.shields.io/pypi/dm/gitool.svg
+   :target: https://pypi.org/project/gitool/
+
 Installation
 ============
 
