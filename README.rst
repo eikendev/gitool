@@ -1,3 +1,18 @@
+Installation
+============
+
+From PyPI
+---------
+::
+
+   pip install gitool
+
+From Source
+-----------
+::
+
+   ./setup.py install
+
 Usage
 =====
 
