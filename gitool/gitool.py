@@ -5,7 +5,7 @@ import sys
 from functools import partial
 
 from .arguments import parse_arguments
-from .config import load_config, get_config_path, get_root_dir
+from .config import load_config, get_default_config_file, get_root_dir
 from .exception import GitoolArgumentException, GitoolConfigurationException
 from .methods import status, list_repositories, dump, compare
 from .util import get_repositories
@@ -67,9 +67,6 @@ def execute_method(args, path):
 def main():
     setup_logger(logger)
 
-    config_path = get_config_path()
-    config = load_config(config_path)
-
     try:
         args = parse_arguments()
     except GitoolArgumentException as e:
@@ -83,6 +80,13 @@ def main():
         logger.debug(msg)
     elif args.quiet:
         logger.setLevel(logging.WARNING)
+
+    config_file = args.config_file
+
+    if config_file is None:
+        config_file = get_default_config_file()
+
+    config = load_config(config_file)
 
     logger.info("Starting Gitool.")
 
