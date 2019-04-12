@@ -13,21 +13,6 @@
 .. image:: https://img.shields.io/pypi/dm/gitool.svg
    :target: https://pypi.org/project/gitool/
 
-Installation
-============
-
-From PyPI
----------
-::
-
-   pip install gitool
-
-From Source
------------
-::
-
-   ./setup.py install
-
 Usage
 =====
 
@@ -42,6 +27,21 @@ For a quick introduction, let me show how you would use the tool to get started.
 
 This will collect status information for all repositories in ``~/git/`` and display a summary when done.
 As can be seen above, you have to specify a directory where all your repositories are located in.
+
+Installation
+============
+
+From PyPI
+---------
+::
+
+   pip install gitool
+
+From Source
+-----------
+::
+
+   ./setup.py install
 
 Configuration
 =============
