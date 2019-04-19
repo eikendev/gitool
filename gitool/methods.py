@@ -3,7 +3,6 @@ import logging
 import sys
 
 from .configuration import Configuration
-from .exception import GitoolException
 from .util import list_properties
 
 logger = logging.getLogger("gitool")
@@ -113,11 +112,6 @@ def compare(repositories, root, filename):
 
     logger.info("Comparing repositories.")
 
-    with open(filename, 'r') as f:
-        lines = f.readlines()
-
-    if len(lines) % 2 != 0:
-        msg = 'Specified file is corrupt.'
-        raise GitoolException(msg)
+    configurations = Configuration.from_file(filename)
 
     # TODO IMPLEMENT

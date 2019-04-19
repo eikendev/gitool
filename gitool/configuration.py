@@ -1,5 +1,7 @@
 import functools
 
+from .exception import GitoolException
+
 
 @functools.total_ordering
 class Configuration:
@@ -28,3 +30,16 @@ class Configuration:
 
     def __hash__(self):
         return hash(self.path)
+
+    @classmethod
+    def from_file(cls, filename):
+        with open(filename, 'r') as f:
+            lines = f.readlines()
+
+        if len(lines) % 2 != 0:
+            msg = 'Specified file is corrupt.'
+            raise GitoolException(msg)
+
+        configurations = set()
+
+        return configurations
