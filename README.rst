@@ -17,7 +17,7 @@ Usage
 =====
 
 This tool can be used to manage many `Git <https://git-scm.com/>`_ repositories at once through the command line.
-``gitool`` can display repositories that contain uncommitted code.
+It can display repositories that contain uncommitted code or not yet pushed commits.
 Another feature is to synchronize a list of your repositories including their configuration across multiple machines.
 
 For a quick introduction, let me show how you would use the tool to get started.
@@ -25,7 +25,7 @@ For a quick introduction, let me show how you would use the tool to get started.
 
     $ gitool status -d ~/git/
 
-This will collect status information for all repositories in ``~/git/`` and display a summary when done.
+This command will collect status information for all repositories in ``~/git/`` and display a summary when done.
 As can be seen above, you have to specify a directory where all your repositories are located in.
 
 Installation
@@ -53,3 +53,12 @@ Alternatively, the path to the configuration file can be set via the ``--config-
 
     [GENERAL]
     RootDir = ~/git/
+
+Development
+===========
+
+The source code can be found on `GitHub <https://github.com/eikendev/gitool>`_.
+To check out the repository, the following command can be used.
+::
+
+   git clone https://github.com/eikendev/gitool.git
