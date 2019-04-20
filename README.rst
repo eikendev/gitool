@@ -57,7 +57,7 @@ Alternatively, the path to the configuration file can be set via the ``--config-
 Development
 ===========
 
-The source code can be found on `GitHub <https://github.com/eikendev/gitool>`_.
+The source code is located on `GitHub <https://github.com/eikendev/gitool>`_.
 To check out the repository, the following command can be used.
 ::
 
