@@ -7,7 +7,7 @@ from .arguments import parse_arguments
 from .config import load_config, get_default_config_file, get_root_dir
 from .exception import GitoolArgumentException, GitoolConfigurationException
 from .logging import setup_logger
-from .methods import status, list_repositories, dump, compare
+from .methods import compare, dump, list_repositories, statistics, status
 from .util import get_repositories
 
 logger = logging.getLogger("gitool")
@@ -31,6 +31,8 @@ def execute_method(args, path):
                         root=path,
                         filename=args.file),
         "list": partial(list_repositories),
+        "statistics": partial(statistics,
+                              root=path),
         "status": partial(status,
                           check_ahead=check_ahead,
                           check_behind=check_behind,

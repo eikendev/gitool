@@ -12,6 +12,7 @@ def parse_arguments():
         "compare",
         "dump",
         "list",
+        "statistics",
         "status",
     ]
 

@@ -8,6 +8,101 @@ from .util import list_properties
 logger = logging.getLogger("gitool")
 
 
+def compare(repositories, root, filename):
+    """
+    Compare a previously made dump with the local situation.
+    """
+
+    logger.info("Comparing repositories.")
+
+    configurations = Configuration.from_file(filename)
+
+    # TODO IMPLEMENT
+
+
+def dump(repositories, root, filename=None):
+    """
+    Dump a machine readable representation of all repositories to file
+    `filename`. Dumped information will include the remote urls and default
+    author information.
+
+    If `filename` is not specified, the dump will be printed to `stdout`.
+    """
+
+    logger.info("Dumping repositories.")
+
+    lines = list()
+
+    for r in repositories:
+        msg = "Dumping {}.".format(r)
+        logger.info(msg)
+
+        f = root / r.path / '.git' / 'config'
+
+        data = str(r.path) + "\n"
+        lines.append(data)
+
+        with open(f, 'rb') as f:
+            data = f.read()
+
+        data = base64.b64encode(data).decode()
+        lines.append(data + "\n")
+
+    if filename is None:
+        sys.stdout.writelines(lines)
+    else:
+        with open(filename, 'w') as f:
+            f.writelines(lines)
+
+
+def list_repositories(repositories):
+    """
+    Print information about all repositories in a human readable form to
+    `stdout`.
+    """
+
+    logger.info("Listing repositories.")
+
+    for r in repositories:
+        msg = "{} ({})".format(r.colored_name, r.user_name)
+        print(msg)
+
+
+def statistics(repositories, root):
+    """
+    Collect statistics about the repositories in the root directory.
+
+    If `filename` is not specified, the data will be printed to `stdout`.
+    """
+
+    logger.info("Collecting statistics.")
+
+    ahead = 0
+    behind = 0
+    dirty = 0
+
+    for r in repositories:
+        msg = "Checking {}.".format(r)
+        logger.info(msg)
+
+        try:
+            ahead += (1 if r.is_ahead else 0)
+            behind += (1 if r.is_behind else 0)
+            dirty += (1 if r.is_dirty else 0)
+        except Exception as e:
+            msg = "Cannot retrieve information for {}: {}".format(r, e)
+            logger.warning(msg)
+            continue
+
+    data = [ahead, behind, dirty]
+    data = ','.join(map(str, data)) + "\n"
+
+    filename = root / '.statistics'
+
+    with open(filename, 'w') as f:
+        f.write(data)
+
+
 def status(repositories, check_ahead=True, check_behind=True, check_dirty=True):
     """
     Check if any repository has uncommited, unpushed or unmerged changes.
@@ -55,63 +150,3 @@ def status(repositories, check_ahead=True, check_behind=True, check_dirty=True):
 
     for message in summary:
         print(message)
-
-
-def list_repositories(repositories):
-    """
-    Print information about all repositories in a human readable form to
-    `stdout`.
-    """
-
-    logger.info("Listing repositories.")
-
-    for r in repositories:
-        msg = "{} ({})".format(r.colored_name, r.user_name)
-        print(msg)
-
-
-def dump(repositories, root, filename=None):
-    """
-    Dump a machine readable representation of all repositories to file
-    `filename`. Dumped information will include the remote urls and default
-    author information.
-
-    If `filename` is not specified, the dump will be printed to `stdout`.
-    """
-
-    logger.info("Dumping repositories.")
-
-    lines = list()
-
-    for r in repositories:
-        msg = "Dumping {}.".format(r)
-        logger.info(msg)
-
-        f = root / r.path / '.git' / 'config'
-
-        data = str(r.path) + "\n"
-        lines.append(data)
-
-        with open(f, 'rb') as f:
-            data = f.read()
-
-        data = base64.b64encode(data).decode()
-        lines.append(data + "\n")
-
-    if filename is None:
-        sys.stdout.writelines(lines)
-    else:
-        with open(filename, 'w') as f:
-            f.writelines(lines)
-
-
-def compare(repositories, root, filename):
-    """
-    Compare a previously made dump with the local situation.
-    """
-
-    logger.info("Comparing repositories.")
-
-    configurations = Configuration.from_file(filename)
-
-    # TODO IMPLEMENT
