@@ -1,6 +1,9 @@
 import base64
+import hashlib
 import logging
 import sys
+
+from pathlib import Path
 
 from .configuration import Configuration
 from .util import list_properties
@@ -34,25 +37,52 @@ def dump(repositories, root, filename=None):
     lines = list()
 
     for r in repositories:
-        msg = "Dumping {}.".format(r)
+        msg = "Gathering configuration of {}.".format(r)
         logger.info(msg)
 
         f = root / r.path / '.git' / 'config'
 
-        data = str(r.path) + "\n"
+        data = bytes(r.path) + b"\n"
         lines.append(data)
 
         with open(f, 'rb') as f:
             data = f.read()
 
-        data = base64.b64encode(data).decode()
-        lines.append(data + "\n")
+        data = base64.b64encode(data)
+        data = data + b"\n"
+        lines.append(data)
 
     if filename is None:
+        lines = map(lambda s: s.decode(), lines)
         sys.stdout.writelines(lines)
-    else:
-        with open(filename, 'w') as f:
-            f.writelines(lines)
+        return
+
+    dumpfile = Path(filename)
+
+    logger.info("Calculating configuration hashes.")
+
+    hashsum_new = hashlib.sha3_256()
+
+    for l in lines:
+        hashsum_new.update(l)
+
+    hashsum_old = hashlib.sha3_256()
+
+    if dumpfile.exists():
+        if dumpfile.is_dir():
+            logger.warning("Cannot calculate hash for existing configuration.")
+        else:
+            with open(filename, 'rb') as f:
+                hashsum_old.update(f.read())
+
+    if hashsum_new.digest() == hashsum_old.digest():
+        logger.info("Repository configurations did not change.")
+        return
+
+    logger.info("Dumping file.")
+
+    with open(filename, 'wb') as f:
+        f.writelines(lines)
 
 
 def list_repositories(repositories):
