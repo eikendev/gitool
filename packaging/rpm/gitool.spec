@@ -2,7 +2,7 @@
 %global srcname gitool
 
 Name:           %{srcname}
-Version:        1.1.4
+Version:        1.1.5
 Release:        1%{?dist}
 Summary:        A tool for managing git repositories
 License:        MIT
@@ -37,6 +37,9 @@ Requires:       %{pythonv}-colorama
 %{python3_sitelib}/*
 
 %changelog
+* Tue Jan 28 2020 eikendev <raphael@eiken.dev> - 1.1.5-1
+- Update to 1.1.5
+
 * Mon May 06 2019 eikendev <raphael@eiken.dev> - 1.1.4-1
 - Update to 1.1.4
 
