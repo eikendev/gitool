@@ -1,16 +1,25 @@
-.. image:: https://img.shields.io/pypi/status/gitool.svg
+.. image:: https://img.shields.io/travis/eikendev/gitool/master
+   :alt: Build status
+   :target: https://travis-ci.org/github/eikendev/gitool/builds/
+
+.. image:: https://img.shields.io/pypi/status/gitool
+   :alt: Development status
    :target: https://pypi.org/project/gitool/
 
-.. image:: https://img.shields.io/pypi/l/gitool.svg
+.. image:: https://img.shields.io/pypi/l/gitool
+   :alt: License
    :target: https://pypi.org/project/gitool/
 
-.. image:: https://img.shields.io/pypi/pyversions/gitool.svg
+.. image:: https://img.shields.io/pypi/pyversions/gitool
+   :alt: Python version
    :target: https://pypi.org/project/gitool/
 
-.. image:: https://img.shields.io/pypi/v/gitool.svg
+.. image:: https://img.shields.io/pypi/v/gitool
+   :alt: Version
    :target: https://pypi.org/project/gitool/
 
-.. image:: https://img.shields.io/pypi/dm/gitool.svg
+.. image:: https://img.shields.io/pypi/dm/gitool
+   :alt: Downloads
    :target: https://pypi.org/project/gitool/
 
 Usage
