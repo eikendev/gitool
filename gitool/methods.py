@@ -18,9 +18,8 @@ def compare(repositories, root, filename):
 
     logger.info("Comparing repositories.")
 
-    configurations = Configuration.from_file(filename)
-
-    # TODO IMPLEMENT
+    # TODO: Implement method and remove noqa comment.
+    configurations = Configuration.from_file(filename)  # noqa: F841
 
 
 def dump(repositories, root, filename=None):
