@@ -62,8 +62,8 @@ def dump(repositories, root, filename=None):
 
     hashsum_new = hashlib.sha3_256()
 
-    for l in lines:
-        hashsum_new.update(l)
+    for line in lines:
+        hashsum_new.update(line)
 
     hashsum_old = hashlib.sha3_256()
 
