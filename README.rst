@@ -61,7 +61,7 @@ Fedora
 .. code:: bash
 
     sudo dnf copr enable eikendev/gitool
-    sudo dnf install gitool
+    sudo dnf install python3-gitool
 
 Configuration
 =============
