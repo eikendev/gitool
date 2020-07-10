@@ -1,6 +1,6 @@
 .. image:: https://img.shields.io/travis/eikendev/gitool/master
     :alt: Build status
-    :target: https://travis-ci.org/github/eikendev/gitool/builds/
+    :target: https://travis-ci.com/github/eikendev/gitool/builds/
 
 .. image:: https://img.shields.io/pypi/status/gitool
     :alt: Development status
