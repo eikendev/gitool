@@ -1,46 +1,45 @@
-DIR_SRC=./gitool
-DIR_TEST=./test
+PYTHON := python3
+MODULE_NAME := gitool
+DIR_SRC := ./${MODULE_NAME}
 
-.PHONY: all
-all: compile
+.PHONY: test
+test: lint
+	${PYTHON} -m pytest -vv
 
-.PHONY: compile
-compile:
-	@echo "Nothing to compile."
+.PHONY: lint
+lint:
+	${PYTHON} -m flake8 \
+		--ignore=E501 \
+		${DIR_SRC}
+	${PYTHON} -m vulture \
+		--exclude version.py \
+		${DIR_SRC}
+	${PYTHON} -m mypy \
+		--allow-redefinition \
+		--ignore-missing-imports \
+		${DIR_SRC}
+
+.PHONY: setup
+setup:
+	pip install -r requirements.txt
+	pip install -r requirements-dev.txt
 
 .PHONY: clean
 clean:
-	find -type d -name '__pycache__' -exec rm -rf {} +;
-	find -type d -name '.pytest_cache' -exec rm -rf {} +;
 	find -type d -name '.mypy_cache' -exec rm -rf {} +;
-	rm -rf ${DIR_TEST}/.cache
-	rm -f tags
+	find -type d -name '.pytest_cache' -exec rm -rf {} +;
+	find -type d -name '__pycache__' -exec rm -rf {} +;
+	rm -f ./tags
 
 .PHONY: run
 run:
-	@python3 -m gitool
-
-.PHONY: test
-test:
-	@python3 -m pytest -vv
+	${PYTHON} -m ${MODULE_NAME}
 
 .PHONY: tags
 tags:
 	ctags -R \
+		--extra=+f \
+		--languages=Python \
 		--sort=yes \
 		--totals=yes \
-		--languages=Python \
-		--extra=+f \
 		${DIR_SRC}
-
-.PHONY: flake
-flake:
-	@flake8 --ignore=E501 ${DIR_SRC}
-
-.PHONY: vulture
-vulture:
-	@vulture-3 --exclude version.py ${DIR_SRC} && echo 'No dead code found.'
-
-.PHONY: check
-check:
-	@mypy --ignore-missing-imports ${DIR_SRC}
