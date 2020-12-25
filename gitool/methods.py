@@ -5,21 +5,9 @@ import sys
 
 from pathlib import Path
 
-from .configuration import Configuration
 from .util import list_properties
 
 logger = logging.getLogger("gitool")
-
-
-def compare(repositories, root, filename):
-    """
-    Compare a previously made dump with the local situation.
-    """
-
-    logger.info("Comparing repositories.")
-
-    # TODO: Implement method and remove noqa comment.
-    configurations = Configuration.from_file(filename)  # noqa: F841
 
 
 def dump(repositories, root, filename=None):
@@ -93,7 +81,7 @@ def list_repositories(repositories):
     logger.info("Listing repositories.")
 
     for r in repositories:
-        msg = "{} ({})".format(r.colored_name, r.user_name)
+        msg = f"{r.colored_name}, {r.user_name} <{r.user_email}>"
         print(msg)
 
 

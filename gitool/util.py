@@ -44,7 +44,7 @@ def get_repositories(path):
     return repositories
 
 
-def list_properties(properties):
+def list_properties(properties) -> str:
     if len(properties) > 1:
         return ', '.join(properties[:-1]) + ' and ' + properties[-1]
     else:
