@@ -27,7 +27,7 @@ Usage
 
 This tool can be used to manage many `Git <https://git-scm.com/>`_ repositories at once through the command line.
 It can display repositories that contain uncommitted code or not yet pushed commits.
-Another feature is to synchronize a list of your repositories including their configuration across multiple machines.
+In the future, this tool is meant as a high-level synchronization tool for repository configurations across multiple machines.
 
 For a quick introduction, let me show how you would use the tool to get started.
 
