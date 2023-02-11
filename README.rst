@@ -1,4 +1,4 @@
-.. image:: https://img.shields.io/github/workflow/status/eikendev/gitool/Main
+.. image:: https://img.shields.io/github/actions/workflow/status/eikendev/gitool/main.yml?branch=master
     :alt: Build status
     :target: https://github.com/eikendev/gitool/actions
 
